@@ -45,12 +45,6 @@ function modelLoaded() {
 	}
   }
 
-function play()
-{
-	song.play();
-	song.setVolume(1);
-	song.rate(1);
-}
 
 function draw() {
    image(video, 0, 0, 600, 500);
@@ -61,45 +55,42 @@ function draw() {
    if(scoreRightWrist > 0.2){
     circle(rightWristX, rightWristY, 25);
 
-    if(rightWristY >0 && rightWristY <=100){
+     if(rightWristY >0 && rightWristY <=100){
      document.getElementById("speed").innerHTML = "Speed = 0.5x"
      song.rate(0.5);
     }
-    if(rightWristY >100 && rightWristY <=200){
+    else if(rightWristY >100 && rightWristY <=200){
      document.getElementById("speed").innerHTML = "Speed = 1x"
      song.rate(1);
     }
-    if(rightWristY >200 && rightWristY <=300){
+    else if(rightWristY >200 && rightWristY <=300){
+     document.getElementById("speed").innerHTML = "Speed = 1.5x"
+     song.rate(1.5);
+    }
+    else if(rightWristY >300 && rightWristY <=400){
      document.getElementById("speed").innerHTML = "Speed = 2x"
      song.rate(2);
     }
-    if(rightWristY >300 && rightWristY <=400){
-     document.getElementById("speed").innerHTML = "Speed = 3x"
-     song.rate(3);
-    }
-    if(rightWristY >400){
-     document.getElementById("speed").innerHTML = "Speed = 5x"
-     song.rate(5);
+     if(rightWristY >400){
+     document.getElementById("speed").innerHTML = "Speed = 2.5x"
+     song.rate(2.5);
     }
    }
-   
+
 if (scoreLeftWrist >0.2){
 
    circle(leftWristX,leftWristY,20);
-   InNumberLeftWrist = Number(leftWristY);
-   remove_decimals = floor(InNumberLeftWrist);
+   InNumberLeftWristY = Number(leftWristY);
+   new_leftWristY = floor(InNumberLeftWristY*2);
    
-   var leftWristY_divide_1000 = remove_decimals/1000;
-   volume = leftWristY_divide_1000 *2;
-   document.getElementById("volume").innerHTML = "Volume = " +volume;
-   song.setVolume(volume);
+   leftWristY_divide_1000 = new_leftWristY/1000;
+   document.getElementById("volume").innerHTML = "Volume = "+leftWristY_divide_1000;
+   song.setVolume(leftWristY_divide_1000);
 }
 }
-
-function modelLoaded() {
-  console.log('PoseNet Is Initialized');
-}
-function play_music()
+function play()
 {
-	music.play();
+	song.play();
+	song.setVolume(1);
+	song.rate(1);
 }
